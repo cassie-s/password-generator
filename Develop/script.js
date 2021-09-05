@@ -5,59 +5,76 @@ var generatePassword = function() {
   //prompt user to answer questions about password
   alert("Please choose from the following password criteria:");
 
-  var password = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!'`~@#$%^&*()_+-][}{|><?;:=";
+  var passwordContains = "";
 
   var lowers = "abcdefghijklmnopqrstuvwxyz";
   var uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "0123456789";
   var special = "!'`~@#$%^&*()_+-][}{|><?;:=";
 
-  var promptLength = function(){
-    var passLength = prompt('How long do you want your password to be? Pick between 8 and 128.');
-      // validate prompt answer
-      if (passLength < 8 || passLength > 128) {
-        alert("You must provide a valid answer! Please try again");
-        //use return to call it again and stop the rest of this function from running
-        return promptLength();
-      }else {
-      return passLength;
-    }
+  var passLength = prompt('How long do you want your password to be? Pick between 8 and 128.');
+    // validate prompt answer
+    if (passLength < 8 || passLength > 128) {
+      alert("You must provide a valid answer! Please try again");
+      //use return to call it again and stop the rest of this function from running
+    return passLength;
   }
+  
+  passLength = parseInt(passLength);
 
   var promptLower = function() {
     var hasLower = confirm('Will your password contain lowercase letters?');
-    password = password + 'abcdefghijklmnopqrstuvwxyz';
+    if (hasLower === true) {
+    passwordContains = passwordContains + lowers;
+    }
   }
     
   var promptUpper = function() {
     var hasUpper = confirm('Will your password contain uppercase letters?');
-    password = password + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (hasUpper === true) {
+    passwordContains = passwordContains + uppers;
+    }
   }
     
   var promptNumeric = function() {
     var hasNumeric = confirm('Do you want numbers in your password? Answer YES or NO');
-    password = password + "0123456789";
+    if (hasNumeric === true) {
+    passwordContains = passwordContains + numbers;
+    }
   }
 
   var promptSpecial = function () {
     var hasSpecial = confirm('Do you want numbers in your password? Answer YES or NO');
-    password = password + "!'`~@#$%^&*()_+-][}{|><?;:=";
+    if (hasSpecial === true) {
+    passwordContains = passwordContains + special;
+    }
   }
-}
-  promptLength();
+
+  // promptLength();
   promptLower();
   promptUpper();
   promptNumeric();
   promptSpecial();
   
-  if (hasLower === false && hasUpper === false && hasNumeric === false && hasSpecial === false) {
+  if (promptLower === false && promptUpper === false && promptNumeric === false && promptSpecial === false) {
     window.alert("You must select at least 1 criteria!");
   generatePassword();
   }
+  console.log(passwordContains);
 
-console.log(password);
+  var finalPassword = "";
+  for (let i = 0; i < passLength; i++){
+    
+    var passwordPool = Math.floor(Math.random() * passwordContains.length);
+    
+    finalPassword = finalPassword + passwordContains[passwordPool];
+    
+  }
+  return finalPassword;
 
-generatePassword();
+}
+
+//validate
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
