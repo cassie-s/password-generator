@@ -5,16 +5,12 @@ var generatePassword = function() {
   //prompt user to answer questions about password
   alert("Please choose from the following password criteria:");
 
-  var password = "";
-
-  var passwordContains = "";
+  var password = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!'`~@#$%^&*()_+-][}{|><?;:=";
 
   var lowers = "abcdefghijklmnopqrstuvwxyz";
   var uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "0123456789";
   var special = "!'`~@#$%^&*()_+-][}{|><?;:=";
-
-
 
   var promptLength = function(){
     var passLength = prompt('How long do you want your password to be? Pick between 8 and 128.');
@@ -30,41 +26,38 @@ var generatePassword = function() {
 
   var promptLower = function() {
     var hasLower = confirm('Will your password contain lowercase letters?');
-    //if hasLower, contain lowers
+    password = password + 'abcdefghijklmnopqrstuvwxyz';
   }
     
   var promptUpper = function() {
     var hasUpper = confirm('Will your password contain uppercase letters?');
-    //if hasUpper, contain uppers;
+    password = password + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   }
     
   var promptNumeric = function() {
     var hasNumeric = confirm('Do you want numbers in your password? Answer YES or NO');
-    //if hasNumeric, contain numbers;
+    password = password + "0123456789";
   }
 
   var promptSpecial = function () {
     var hasSpecial = confirm('Do you want numbers in your password? Answer YES or NO');
-    //if hasSpecial, contain special characters;
+    password = password + "!'`~@#$%^&*()_+-][}{|><?;:=";
   }
 }
-  // var getInput = function() {
-  //   passLength = promptLength();
-  //   hasLower = promptLower();
-  //   hasUpper = promptUpper();
-  //   hasNumeric = promptNumeric();
-  //   hasSpecial = promptSpecial();
-  // }
-  // getInput();
+  promptLength();
+  promptLower();
+  promptUpper();
+  promptNumeric();
+  promptSpecial();
   
-  // if (hasLower === false && hasUpper === false && hasNumeric === false && hasSpecial === false) {
-  //    window.alert("You must select at least 1 criteria!");
-  //  getInput();
-  // }
-  // var passwordContains = '';
-  //   if (hasLower) {
-  //    password = password + 'abcdefghijklmnopqrstuvwxyz';
-  // }
+  if (hasLower === false && hasUpper === false && hasNumeric === false && hasSpecial === false) {
+    window.alert("You must select at least 1 criteria!");
+  generatePassword();
+  }
+
+console.log(password);
+
+generatePassword();
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
