@@ -5,46 +5,59 @@ var generatePassword = function() {
   //prompt user to answer questions about password
   alert("Please choose from the following password criteria:");
 
+  //empty string for the password to fill
   var passwordContains = "";
 
+  //define variables before they are called within the prompt functions
+  var hasLower;
+  var hasUpper;
+  var hasNumeric;
+  var hasSpecial;
+
+  //define character sets for passwordContains to choose from
   var lowers = "abcdefghijklmnopqrstuvwxyz";
   var uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "0123456789";
   var special = "!'`~@#$%^&*()_+-][}{|><?;:=";
 
+  //prompt user to pick a password length
   var passLength = prompt('Choose a password length between 8 and 128.');
-    // validate prompt answer
     if (passLength < 8 || passLength > 128) {
       alert("You must provide a valid answer! Please try again");
       //use return to call it again and stop the rest of this function from running
-    return passLength;
+    return generatePassword();
   }
   
+  //make passLength into an integer instead of a string
   passLength = parseInt(passLength);
 
+  //prompt user to choose if they will use lowercase letters
   var promptLower = function() {
-    var hasLower = confirm('Will your password contain lowercase letters?');
+    hasLower = confirm('Will your password contain lowercase letters?');
     if (hasLower === true) {
     passwordContains = passwordContains + lowers;
     }
   }
     
+  //prompt user to choose if they will user uppercase letters
   var promptUpper = function() {
-    var hasUpper = confirm('Will your password contain uppercase letters?');
+    hasUpper = confirm('Will your password contain uppercase letters?');
     if (hasUpper === true) {
     passwordContains = passwordContains + uppers;
     }
   }
-    
+  
+  //prompt user to choose if they will use numbers
   var promptNumeric = function() {
-    var hasNumeric = confirm('Will your password contain numbers?');
+    hasNumeric = confirm('Will your password contain numbers?');
     if (hasNumeric === true) {
     passwordContains = passwordContains + numbers;
     }
   }
 
+  //prompt user to choose if they will use special characters
   var promptSpecial = function () {
-    var hasSpecial = confirm('Will your password contain special characters?');
+    hasSpecial = confirm('Will your password contain special characters?');
     if (hasSpecial === true) {
     passwordContains = passwordContains + special;
     }
@@ -55,13 +68,13 @@ var generatePassword = function() {
   promptNumeric();
   promptSpecial();
   
+  //run through the code again if the user did not select at least 1 criteria
   if (hasLower === false && hasUpper === false && hasNumeric === false && hasSpecial === false) {
     alert("You must select at least 1 criteria!");
-   
-    // generatePassword();
+    generatePassword();
   }
-  // console.log(passwordContains);
 
+  //for loop to choose a random password based on user's choices
   var finalPassword = "";
   for (let i = 0; i < passLength; i++){
     
@@ -71,7 +84,6 @@ var generatePassword = function() {
     
   }
   return finalPassword;
-
 }
 
 // Get references to the #generate element
@@ -83,7 +95,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
