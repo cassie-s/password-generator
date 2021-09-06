@@ -12,7 +12,7 @@ var generatePassword = function() {
   var numbers = "0123456789";
   var special = "!'`~@#$%^&*()_+-][}{|><?;:=";
 
-  var passLength = prompt('How long do you want your password to be? Pick between 8 and 128.');
+  var passLength = prompt('Choose a password length between 8 and 128.');
     // validate prompt answer
     if (passLength < 8 || passLength > 128) {
       alert("You must provide a valid answer! Please try again");
@@ -37,30 +37,30 @@ var generatePassword = function() {
   }
     
   var promptNumeric = function() {
-    var hasNumeric = confirm('Do you want numbers in your password? Answer YES or NO');
+    var hasNumeric = confirm('Will your password contain numbers?');
     if (hasNumeric === true) {
     passwordContains = passwordContains + numbers;
     }
   }
 
   var promptSpecial = function () {
-    var hasSpecial = confirm('Do you want numbers in your password? Answer YES or NO');
+    var hasSpecial = confirm('Will your password contain special characters?');
     if (hasSpecial === true) {
     passwordContains = passwordContains + special;
     }
   }
 
-  // promptLength();
   promptLower();
   promptUpper();
   promptNumeric();
   promptSpecial();
   
-  if (promptLower === false && promptUpper === false && promptNumeric === false && promptSpecial === false) {
-    window.alert("You must select at least 1 criteria!");
-  generatePassword();
+  if (hasLower === false && hasUpper === false && hasNumeric === false && hasSpecial === false) {
+    alert("You must select at least 1 criteria!");
+   
+    // generatePassword();
   }
-  console.log(passwordContains);
+  // console.log(passwordContains);
 
   var finalPassword = "";
   for (let i = 0; i < passLength; i++){
@@ -73,8 +73,6 @@ var generatePassword = function() {
   return finalPassword;
 
 }
-
-//validate
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
