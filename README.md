@@ -8,3 +8,5 @@ Languages used:
 * Javascript
 * HTML
 * CSS
+
+Live Site: https://cassie-s.github.io/password-generator/
